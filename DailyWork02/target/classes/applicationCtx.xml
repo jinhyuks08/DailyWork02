@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="dto" class="com.cjon.bank.dto.BankDTO" scope="prototype"/> <!-- scope의 기본값은 "singleton": bean 객체를 한 개만 만들겠다는 것을 의미한다. "prototype"은 getbean할 때 마다 새로운 객체를 만든다 -->
+	
+	<bean id="dbTemplate" class="com.cjon.bank.util.DBTemplate" scope="prototype"/>
+	
+	<bean id="dao" class="com.cjon.bank.dao.BankDAO" />
+		
+	<bean id="service" class="com.cjon.bank.service.BankService" scope="prototype">
+		<property name="template">
+			<ref bean="dbTemplate" />
+		</property>		
+		<property name="dao">
+			<ref bean="dao" />
+		</property>
+	
+	</bean>
+</beans>
+
